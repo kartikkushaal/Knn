@@ -11,20 +11,14 @@ y = df.iloc[:, 3].values
 df
 labelEncoder_gender =  LabelEncoder()
 X[:,0] = labelEncoder_gender.fit_transform(X[:,0])
-
-# Optional - if you want to convert X to float data type
-
 X = np.vstack(X[:, :]).astype(np.float64)
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.25, random_state=0)
 sc_X = StandardScaler()
 X_train = sc_X.fit_transform(X_train)
 X_test = sc_X.transform(X_test)
-# metric = minkowski and p=2 is Euclidean Distance
-# metric = minkowski and p=1 is Manhattan Distance
 classifier = KNeighborsClassifier(n_neighbors=5, metric="minkowski",p=2)
 classifier.fit(X_train, y_train)
 KNeighborsClassifier()
-# Step 5 - Make Prediction
 y_pred = classifier.predict(X_test)
 cm = metrics.confusion_matrix(y_test, y_pred) 
 print(cm)
